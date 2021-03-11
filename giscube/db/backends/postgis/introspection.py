@@ -1,3 +1,4 @@
+from django.contrib.gis.db.backends.postgis.introspection import GeoIntrospectionError
 from django.contrib.gis.db.backends.postgis.introspection import PostGISIntrospection as OriginalPostGISIntrospection
 from django.contrib.gis.gdal import OGRGeomType
 from django.db.backends.postgresql.introspection import DatabaseIntrospection as OriginalDatabaseIntrospection

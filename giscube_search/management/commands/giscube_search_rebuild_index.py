@@ -13,7 +13,6 @@ class Command(BaseCommand):
             try:
                 search_index_module = importlib.import_module(m)
             except ImportError:
-                pass
                 continue
             for search_item in getattr(search_index_module, 'index_config', []):
                 index = PostgresSearchIndex(config=search_item)

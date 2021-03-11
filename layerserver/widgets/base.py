@@ -19,7 +19,6 @@ class BaseWidget(object):
         """
         admin validation
         """
-        pass
 
     @staticmethod
     def serialize_widget_options(obj):

@@ -19,7 +19,6 @@ def minmax(a, b, c):
 
 class InvalidCoverageError(Exception):
     """ Raised when coverage bounds are invalid """
-    pass
 
 
 class GoogleProjection(object):
@@ -31,7 +30,7 @@ class GoogleProjection(object):
     Originally written by OSM team : http://svn.openstreetmap.org/applications/rendering/mapnik/generate_tiles.py
     """
 
-    def __init__(self, tilesize=DEFAULT_TILE_SIZE, levels=[0], scheme='wmts'):
+    def __init__(self, tilesize=DEFAULT_TILE_SIZE, levels=None, scheme='wmts'):
         if not levels:
             raise InvalidCoverageError(_("Wrong zoom levels."))
         self.Bc = []
@@ -43,7 +42,7 @@ class GoogleProjection(object):
         self.tilesize = tilesize
         self.scheme = scheme
         c = tilesize
-        for d in range(self.maxlevel):
+        for _l in range(self.maxlevel):
             e = c / 2
             self.Bc.append(c / 360.0)
             self.Cc.append(c / (2 * pi))
@@ -119,7 +118,7 @@ class GoogleProjection(object):
         ll0 = (xmin, ymax)  # left top
         ll1 = (xmax, ymin)  # right bottom
 
-        l = []
+        tiles = []
         for z in self.levels:
             px0 = self.project_pixels(ll0, z)
             px1 = self.project_pixels(ll1, z)
@@ -134,5 +133,5 @@ class GoogleProjection(object):
                         continue
                     if self.scheme == 'tms':
                         y = ((2**z - 1) - y)
-                    l.append((z, x, y))
-        return l
+                    tiles.append((z, x, y))
+        return tiles

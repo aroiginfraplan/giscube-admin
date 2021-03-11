@@ -15,7 +15,6 @@ class Command(BaseCommand):
                 m = "%s.giscube_search_indexes" % app_mod.__name__
                 search_index_module = importlib.import_module(m)
             except ImportError:
-                pass
                 continue
 
             for search_item in getattr(search_index_module, 'index_config', []):
