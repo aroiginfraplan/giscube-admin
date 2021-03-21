@@ -6,15 +6,15 @@ import django.db.models.deletion
 
 
 def migrate_to_anonymous_view(apps, schema_editor):
-    GeoJsonLayer = apps.get_model('qgisserver', 'Service')
-    for layer in GeoJsonLayer.objects.all():
+    ModelLayer = apps.get_model('qgisserver', 'Service')
+    for layer in ModelLayer.objects.all():
         layer.anonymous_view = layer.visibility == 'public'
         layer.save()
 
 
 def undo_migrate_to_anonymous_view(apps, schema_editor):
-    GeoJsonLayer = apps.get_model('qgisserver', 'Service')
-    for layer in GeoJsonLayer.objects.all():
+    ModelLayer = apps.get_model('qgisserver', 'Service')
+    for layer in ModelLayer.objects.all():
         if layer.anonymous_view:
             layer.visibility == 'public'
         else:
@@ -25,7 +25,7 @@ def undo_migrate_to_anonymous_view(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('qgisserver', '0026_auto_20210309_0542'),
+        ('qgisserver', '0026_auto_20210321_0542'),
     ]
     operations = [
         migrations.RunPython(migrate_to_anonymous_view, undo_migrate_to_anonymous_view),

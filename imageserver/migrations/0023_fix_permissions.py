@@ -25,7 +25,7 @@ def undo_migrate_to_anonymous_view(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('imageserver', '0022_auto_20210320_0817'),
+        ('imageserver', '0022_auto_20210321_0817'),
     ]
     operations = [
         migrations.RunPython(migrate_to_anonymous_view, undo_migrate_to_anonymous_view),

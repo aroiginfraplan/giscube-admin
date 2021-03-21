@@ -14,10 +14,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='service',
-            name='visibility',
-        ),
         migrations.AddField(
             model_name='service',
             name='anonymous_view',
